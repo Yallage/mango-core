@@ -1,0 +1,3 @@
+main: com.yallage.mango.core.MangoCore
+version: 1.0.0
+name: MangoCore
