@@ -17,7 +17,7 @@ public class MongodbLoader {
                     MongoCredential credential = MongoCredential.createCredential(database.getUsername(),
                             database.getDatabase(),
                             database.getPassword().toCharArray());
-                    Connection.connections.put(database, client.getDatabase(database.getDatabase()));
+                    Connection.connections.put(database, client);
                     MangoLogger.info("链接到数据库 " + database.getName());
                 }
         );
@@ -30,12 +30,13 @@ public class MongodbLoader {
         );
 
         // 收集所有的 mongodb 集合
-        Connection.connections.values().forEach(
-                database -> {
-                    List<String> collections = new ArrayList<>();
-                    database.listCollectionNames().iterator().forEachRemaining(collections::add);
-                    Connection.collections.put(database.getName(), collections);
-                }
-        );
+        Connection.connections.forEach((database, client) -> {
+            List<String> collections = new ArrayList<>();
+            client.getDatabase(database.getDatabase())
+                    .listCollectionNames()
+                    .iterator()
+                    .forEachRemaining(collections::add);
+            Connection.collections.put(database.getDatabase(), collections);
+        });
     }
 }
