@@ -12,7 +12,7 @@ public class MongodbLoader {
     public static void load() {
         // 加载 Mongodb Client
         Configuring.getConfig().getDatabases().forEach(
-                database -> {
+                (databaseName, database) -> {
                     MongoClient client = new MongoClient(database.getHost(), database.getPort());
                     MongoCredential credential = MongoCredential.createCredential(database.getUsername(),
                             database.getDatabase(),

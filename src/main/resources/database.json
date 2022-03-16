@@ -2,22 +2,20 @@
   "thread_core_pool_size": "5",
   "thread_max_pool_size": "150",
   "thread_keep_alive_seconds": "0",
-  "databases": [
-    {
-      "name": "database1",
+  "databases": {
+    "database1": {
       "host": "localhost",
       "port": "27017",
       "username": "root",
       "password": "root",
       "database": "database1"
     },
-    {
-      "name": "database2",
+    "database2": {
       "host": "localhost",
       "port": "27017",
       "username": "root",
       "password": "root",
       "database": "database2"
     }
-  ]
+  }
 }

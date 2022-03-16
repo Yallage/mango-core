@@ -3,7 +3,7 @@ package com.yallage.mango.core.data;
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 
-import java.util.List;
+import java.util.Map;
 
 @Data
 public class Config {
@@ -13,7 +13,7 @@ public class Config {
     int threadMaxPoolSize;
     @SerializedName("thread_keep_alive_seconds")
     long threadKeepAliveTime;
-    List<Database> databases;
+    Map<String, Database> databases;
 
     public Config() {
     }
