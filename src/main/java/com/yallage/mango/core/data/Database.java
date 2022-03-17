@@ -6,7 +6,6 @@ import lombok.Data;
 @Data
 @Builder
 public class Database {
-    String name;
     String database;
     String host;
     int port;

@@ -13,6 +13,7 @@ public class Config {
     int threadMaxPoolSize;
     @SerializedName("thread_keep_alive_seconds")
     long threadKeepAliveTime;
+    // 数据库配置文件 key 为显示名称 value 为数据库配置
     Map<String, Database> databases;
 
     public Config() {

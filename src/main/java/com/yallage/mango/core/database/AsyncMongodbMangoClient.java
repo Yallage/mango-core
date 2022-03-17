@@ -1,10 +1,16 @@
 package com.yallage.mango.core.database;
 
+import com.google.gson.Gson;
+import com.yallage.mango.core.interfaces.AsyncMangoClient;
+
 import java.util.concurrent.Future;
 
-import com.yallage.mango.core.interfaces.AsyncDatabaseClient;
+public class AsyncMongodbMangoClient implements AsyncMangoClient {
+    Gson gson;
 
-public class AsyncMangoClient implements AsyncDatabaseClient{
+    public AsyncMongodbMangoClient(Gson gson) {
+        this.gson = gson;
+    }
 
     @Override
     public Future<Boolean> create(String database, String collection, Object data) {

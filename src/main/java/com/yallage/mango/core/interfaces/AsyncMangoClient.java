@@ -2,7 +2,7 @@ package com.yallage.mango.core.interfaces;
 
 import java.util.concurrent.Future;
 
-public interface AsyncDatabaseClient {
+public interface AsyncMangoClient {
     Future<Boolean> create(String database, String collection, Object data);
 
     <T> Future<T> read(String database, String collection, T data);
