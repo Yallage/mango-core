@@ -12,7 +12,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-public class MangoCore extends JavaPlugin {
+public class BukkitMangoCore extends JavaPlugin {
 
     @Override
     public void onLoad() {

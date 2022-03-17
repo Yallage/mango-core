@@ -1,7 +1,7 @@
 package com.yallage.mango.core.config;
 
 import com.google.gson.Gson;
-import com.yallage.mango.core.MangoCore;
+import com.yallage.mango.core.BukkitMangoCore;
 import com.yallage.mango.core.data.Config;
 import com.yallage.mango.core.log.MangoLogger;
 import org.bukkit.Bukkit;
@@ -26,7 +26,7 @@ public class Configuring {
         if (!file.exists()) {
             Objects.requireNonNull(
                             Bukkit.getPluginManager()
-                                    .getPlugin(MangoCore.class.getName()))
+                                    .getPlugin(BukkitMangoCore.class.getName()))
                     .getResource("database.json");
         }
 

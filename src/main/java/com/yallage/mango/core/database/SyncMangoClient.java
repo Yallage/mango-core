@@ -10,13 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class MongodbMangoClient implements MangoClient {
+public class SyncMangoClient implements MangoClient {
     // json 解析器
     Gson gson;
     // 数据库配置文件
     Config config = Configuring.getConfig();
 
-    public MongodbMangoClient(Gson gson) {
+    public SyncMangoClient(Gson gson) {
         this.gson = gson;
     }
 
@@ -56,7 +56,34 @@ public class MongodbMangoClient implements MangoClient {
                 .iterator()
                 .forEachRemaining(document -> {
                     // 将 document 转换回对象
-                    list.add(gson.fromJson(document.toJson(), type));                });
+                    list.add(gson.fromJson(document.toJson(), type));
+                });
         return list;
+    }
+
+    @Override
+    public void createMany(String database, String collection, List<Object> data) {
+        List<Document> documents = new ArrayList<>();
+        data.forEach(item -> documents.add(Document.parse(gson.toJson(item))));
+        MongodbConnection.connections.get(config.getDatabases().get(database))
+                .getDatabase(database)
+                .getCollection(collection)
+                .insertMany(documents);
+    }
+
+    @Override
+    public void updateOne(String database, String collection, Map<String, Object> index, Object data) {
+        MongodbConnection.connections.get(config.getDatabases().get(database))
+                .getDatabase(database)
+                .getCollection(collection)
+                .updateOne(Document.parse(gson.toJson(data)), Document.parse(gson.toJson(data)));
+    }
+
+    @Override
+    public void deleteOne(String database, String collection, Map<String, Object> index) {
+        MongodbConnection.connections.get(config.getDatabases().get(database))
+                .getDatabase(database)
+                .getCollection(collection)
+                .deleteOne(Document.parse(gson.toJson(index)));
     }
 }
