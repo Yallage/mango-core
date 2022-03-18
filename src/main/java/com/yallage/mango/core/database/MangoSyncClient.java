@@ -1,6 +1,7 @@
 package com.yallage.mango.core.database;
 
 import com.google.gson.Gson;
+import com.mongodb.client.MongoCollection;
 import com.yallage.mango.core.config.MangoBukkitConfiguring;
 import com.yallage.mango.core.data.Config;
 import com.yallage.mango.core.interfaces.MangoClient;
@@ -22,35 +23,24 @@ public class MangoSyncClient implements MangoClient {
 
     @Override
     public void create(String database, String collection, Object data) {
-        MongodbConnection.connections.get(config.getDatabases().get(database))
-                .getDatabase(database)
-                .getCollection(collection)
-                .insertOne(Document.parse(gson.toJson(data)));
+        this.collections(database, collection).insertOne(Document.parse(gson.toJson(data)));
     }
 
     @Override
     public void update(String database, String collection, Map<String, Object> index, Object data) {
-        MongodbConnection.connections.get(config.getDatabases().get(database))
-                .getDatabase(database)
-                .getCollection(collection)
-                .updateMany(Document.parse(gson.toJson(index)), Document.parse(gson.toJson(data)));
+        this.collections(database, collection).updateMany(Document.parse(gson.toJson(index)), Document.parse(gson.toJson(data)));
     }
 
     @Override
     public void delete(String database, String collection, Map<String, Object> index) {
-        MongodbConnection.connections.get(config.getDatabases().get(database))
-                .getDatabase(database)
-                .getCollection(collection)
-                .deleteMany(Document.parse(gson.toJson(index)));
+        this.collections(database, collection).deleteMany(Document.parse(gson.toJson(index)));
     }
 
     @Override
     public <T> List<T> read(String database, String collection, Map<String, Object> index, Class<T> type) {
         List<T> list = new ArrayList<>();
         // 获取数据库连接
-        MongodbConnection.connections.get(config.getDatabases().get(database))
-                .getDatabase(database)
-                .getCollection(collection)
+        this.collections(database, collection)
                 // 转换 index 为 Document
                 .find(Document.parse(gson.toJson(index)))
                 .iterator()
@@ -65,25 +55,22 @@ public class MangoSyncClient implements MangoClient {
     public void createMany(String database, String collection, List<Object> data) {
         List<Document> documents = new ArrayList<>();
         data.forEach(item -> documents.add(Document.parse(gson.toJson(item))));
-        MongodbConnection.connections.get(config.getDatabases().get(database))
-                .getDatabase(database)
-                .getCollection(collection)
-                .insertMany(documents);
+        this.collections(database, collection).insertMany(documents);
     }
 
     @Override
     public void updateOne(String database, String collection, Map<String, Object> index, Object data) {
-        MongodbConnection.connections.get(config.getDatabases().get(database))
-                .getDatabase(database)
-                .getCollection(collection)
-                .updateOne(Document.parse(gson.toJson(data)), Document.parse(gson.toJson(data)));
+        this.collections(database, collection).updateOne(Document.parse(gson.toJson(data)), Document.parse(gson.toJson(data)));
     }
 
     @Override
     public void deleteOne(String database, String collection, Map<String, Object> index) {
-        MongodbConnection.connections.get(config.getDatabases().get(database))
+        this.collections(database, collection).deleteOne(Document.parse(gson.toJson(index)));
+    }
+
+    public MongoCollection<Document> collections(String database, String collection) {
+        return MongodbConnection.connections.get(config.getDatabases().get(database))
                 .getDatabase(database)
-                .getCollection(collection)
-                .deleteOne(Document.parse(gson.toJson(index)));
+                .getCollection(collection);
     }
 }

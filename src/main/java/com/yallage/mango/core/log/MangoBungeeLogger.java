@@ -1,12 +1,12 @@
 package com.yallage.mango.core.log;
 
-import com.yallage.mango.core.MangoBungeeCordCore;
+import com.yallage.mango.core.MangoBungeeCore;
 import org.bukkit.ChatColor;
 
 import java.util.logging.Logger;
 
-public class MangoBungeeCordLogger {
-    static Logger logger = MangoBungeeCordCore.getInstance().getLogger();
+public class MangoBungeeLogger {
+    static Logger logger = MangoBungeeCore.getInstance().getLogger();
 
     public static void info(String message) {
         logger.info(ChatColor.GREEN + "[YaMangoCore] " + message);
