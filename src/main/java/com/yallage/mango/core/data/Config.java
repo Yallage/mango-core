@@ -1,11 +1,13 @@
 package com.yallage.mango.core.data;
 
 import com.google.gson.annotations.SerializedName;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.Map;
 
 @Data
+@AllArgsConstructor
 public class Config {
     @SerializedName("thread_core_pool_size")
     int threadCorePoolSize;
