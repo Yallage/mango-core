@@ -5,7 +5,7 @@ import org.bukkit.ChatColor;
 
 import java.util.logging.Logger;
 
-public class MangoLogger {
+public class MangoBukkitLogger {
     static Logger logger = Bukkit.getLogger();
 
     public static void info(String message) {

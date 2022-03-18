@@ -3,7 +3,7 @@ package com.yallage.mango.core.config;
 import com.google.gson.Gson;
 import com.yallage.mango.core.MangoBukkitCore;
 import com.yallage.mango.core.data.Config;
-import com.yallage.mango.core.log.MangoLogger;
+import com.yallage.mango.core.log.MangoBukkitLogger;
 import org.bukkit.Bukkit;
 
 import java.io.BufferedReader;
@@ -33,22 +33,22 @@ public class MangoBukkitConfiguring {
         // 读取配置文件
         try {
             BufferedReader reader = new BufferedReader(new FileReader(file));
-            MangoLogger.info("配置文件加载中...");
+            MangoBukkitLogger.info("配置文件加载中...");
             config = gson.fromJson(reader, Config.class);
             // 反射检查服务器配置任意变量是否为空
             Field[] fields = config.getClass().getDeclaredFields();
             for (Field field : fields) {
                 field.setAccessible(true);
                 if (field.get(config) == null) {
-                    MangoLogger.severe("错误的配置 " + field.getName());
+                    MangoBukkitLogger.severe("错误的配置 " + field.getName());
                     Bukkit.getServer().shutdown();
                 }
             }
-            MangoLogger.info("配置文件加载完成");
+            MangoBukkitLogger.info("配置文件加载完成");
         } catch (FileNotFoundException exception) {
-            MangoLogger.severe("database.json 文件未找到.");
+            MangoBukkitLogger.severe("database.json 文件未找到.");
         } catch (IllegalAccessException exception) {
-            MangoLogger.severe("配置文件非法参数");
+            MangoBukkitLogger.severe("配置文件非法参数");
         }
     }
 
@@ -58,15 +58,15 @@ public class MangoBukkitConfiguring {
         try {
             OutputStream outputStream = new FileOutputStream(file);
             outputStream.write(json.getBytes());
-            MangoLogger.info("配置文件已保存");
+            MangoBukkitLogger.info("配置文件已保存");
         } catch (IOException exception) {
-            MangoLogger.severe(exception.getMessage());
+            MangoBukkitLogger.severe(exception.getMessage());
         }
     }
 
     public static void reloadConfig() {
         loadConfig();
-        MangoLogger.info("重新加载配置文件");
+        MangoBukkitLogger.info("重新加载配置文件");
     }
 
     public static Config getConfig() {
