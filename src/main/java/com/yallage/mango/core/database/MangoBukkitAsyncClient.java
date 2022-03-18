@@ -1,7 +1,7 @@
 package com.yallage.mango.core.database;
 
 import com.google.gson.Gson;
-import com.yallage.mango.core.BukkitMangoCore;
+import com.yallage.mango.core.MangoBukkitCore;
 import com.yallage.mango.core.event.MangoBukkitAsyncEvent;
 import org.bson.Document;
 import org.bukkit.Bukkit;
@@ -11,15 +11,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-public class BukkitAsyncMangoClient extends SyncMangoClient {
-    public BukkitAsyncMangoClient(Gson gson) {
+public class MangoBukkitAsyncClient extends MangoSyncClient {
+    public MangoBukkitAsyncClient(Gson gson) {
         super(gson);
     }
 
     public String read(String database, String collection, Map<String, Object> index) {
         // 生成 async id
         String asyncId = UUID.randomUUID().toString();
-        Bukkit.getScheduler().runTaskAsynchronously(BukkitMangoCore.getPlugin(BukkitMangoCore.class), () -> {
+        Bukkit.getScheduler().runTaskAsynchronously(MangoBukkitCore.getPlugin(MangoBukkitCore.class), () -> {
             List<String> list = new ArrayList<>();
             // 获取数据库连接
             MongodbConnection.connections.get(config.getDatabases().get(database))

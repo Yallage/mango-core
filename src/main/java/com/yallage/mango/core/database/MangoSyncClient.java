@@ -1,7 +1,7 @@
 package com.yallage.mango.core.database;
 
 import com.google.gson.Gson;
-import com.yallage.mango.core.config.Configuring;
+import com.yallage.mango.core.config.MangoBukkitConfiguring;
 import com.yallage.mango.core.data.Config;
 import com.yallage.mango.core.interfaces.MangoClient;
 import org.bson.Document;
@@ -10,13 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class SyncMangoClient implements MangoClient {
+public class MangoSyncClient implements MangoClient {
     // json 解析器
     Gson gson;
     // 数据库配置文件
-    Config config = Configuring.getConfig();
+    Config config = MangoBukkitConfiguring.getConfig();
 
-    public SyncMangoClient(Gson gson) {
+    public MangoSyncClient(Gson gson) {
         this.gson = gson;
     }
 

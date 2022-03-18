@@ -1,6 +1,6 @@
 package com.yallage.mango.core;
 
-import com.yallage.mango.core.config.Configuring;
+import com.yallage.mango.core.config.MangoBukkitConfiguring;
 import com.yallage.mango.core.data.Config;
 import com.yallage.mango.core.database.MongodbConnection;
 import com.yallage.mango.core.database.MongodbLoader;
@@ -12,18 +12,18 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-public class BukkitMangoCore extends JavaPlugin {
+public class MangoBukkitCore extends JavaPlugin {
 
     @Override
     public void onLoad() {
         MangoLogger.info("芒果核 YaMangoCore 加载中...");
-        Configuring.loadConfig();
+        MangoBukkitConfiguring.loadConfig();
     }
 
     @Override
     public void onEnable() {
         MangoLogger.info("芒果核 YaMangoCore 检查中...");
-        Config config = Configuring.getConfig();
+        Config config = MangoBukkitConfiguring.getConfig();
 
         MangoLogger.info("初始化资源");
         // 线程池
@@ -58,6 +58,6 @@ public class BukkitMangoCore extends JavaPlugin {
         // 关闭线程池
         MongodbConnection.executors.shutdown();
         // 保存配置文件
-        Configuring.saveConfig();
+        MangoBukkitConfiguring.saveConfig();
     }
 }

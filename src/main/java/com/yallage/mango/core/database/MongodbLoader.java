@@ -2,13 +2,13 @@ package com.yallage.mango.core.database;
 
 import com.mongodb.MongoClient;
 import com.mongodb.MongoCredential;
-import com.yallage.mango.core.config.Configuring;
+import com.yallage.mango.core.config.MangoBukkitConfiguring;
 import com.yallage.mango.core.log.MangoLogger;
 
 public class MongodbLoader {
     public static void load() {
         // 加载 Mongodb Client
-        Configuring.getConfig().getDatabases().forEach(
+        MangoBukkitConfiguring.getConfig().getDatabases().forEach(
                 (name, database) -> {
                     MongoClient client = new MongoClient(database.getHost(), database.getPort());
                     MongoCredential credential = MongoCredential.createCredential(database.getUsername(),
