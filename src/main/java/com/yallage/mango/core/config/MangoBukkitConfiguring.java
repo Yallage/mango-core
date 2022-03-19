@@ -14,20 +14,16 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
-import java.util.Objects;
 
 public class MangoBukkitConfiguring {
     static Gson gson = new Gson();
     static Config config = new Config();
 
     public static void loadConfig() {
-        File file = new File("YaMangoCore/database.json");
+        File file = new File(MangoBukkitCore.getInstance().getDescription().getName() + "/config.json");
 
         if (!file.exists()) {
-            Objects.requireNonNull(
-                            Bukkit.getPluginManager()
-                                    .getPlugin(MangoBukkitCore.class.getName()))
-                    .getResource("database.json");
+            MangoBukkitCore.getInstance().saveResource("config.json", false);
         }
 
         // 读取配置文件
@@ -46,14 +42,14 @@ public class MangoBukkitConfiguring {
             }
             MangoBukkitLogger.info("配置文件加载完成");
         } catch (FileNotFoundException exception) {
-            MangoBukkitLogger.severe("database.json 文件未找到.");
+            MangoBukkitLogger.severe("config.json 文件未找到.");
         } catch (IllegalAccessException exception) {
             MangoBukkitLogger.severe("配置文件非法参数");
         }
     }
 
     public static void saveConfig() {
-        File file = new File("database.json");
+        File file = new File(MangoBukkitCore.getInstance().getDescription().getName() + "config.json");
         String json = gson.toJson(config);
         try {
             OutputStream outputStream = new FileOutputStream(file);

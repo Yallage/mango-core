@@ -22,13 +22,13 @@ public class MangoBungeeConfiguring {
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
     public static void loadConfig() {
-        File file = new File("YaMangoCore/database.json");
+        File file = new File(MangoBungeeCore.getInstance().getDescription().getName() + "/config.json");
 
         if (!file.exists()) {
             try {
                 file.createNewFile();
                 Objects.requireNonNull(MangoBungeeCore.getInstance()
-                                .getResourceAsStream("/database.json")).
+                                .getResourceAsStream("/config.json")).
                         transferTo(new FileOutputStream(file));
             } catch (IOException exception) {
                 ProxyServer.getInstance().stop();
@@ -51,14 +51,14 @@ public class MangoBungeeConfiguring {
             }
             MangoBungeeLogger.info("配置文件加载完成");
         } catch (FileNotFoundException exception) {
-            MangoBungeeLogger.severe("database.json 文件未找到.");
+            MangoBungeeLogger.severe("config.json 文件未找到.");
         } catch (IllegalAccessException exception) {
             MangoBungeeLogger.severe("配置文件非法参数");
         }
     }
 
     public static void saveConfig() {
-        File file = new File("database.json");
+        File file = new File(MangoBungeeCore.getInstance().getDescription().getName() + "/config.json");
         String json = gson.toJson(config);
         try {
             OutputStream outputStream = new FileOutputStream(file);
