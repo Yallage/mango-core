@@ -34,11 +34,9 @@ dependencies {
 
     // https://mvnrepository.com/artifact/com.google.code.gson/gson
     implementation 'com.google.code.gson:gson:2.9.0'
-    shadow 'com.google.code.gson:gson:2.9.0'
 
     // https://mvnrepository.com/artifact/org.mongodb/mongo-java-driver
     implementation 'org.mongodb:mongo-java-driver:3.12.10'
-    shadow 'org.mongodb:mongo-java-driver:3.12.10'
 }
 
 test {
@@ -68,6 +66,9 @@ shadowJar {
                 'Main-Class': 'com.yallage.mango.core.MangoCore',
                 "Multi-Release": true
         )
+    }
+    dependencies {
+        include(dependency('org.mongodb:mongo-java-driver:3.12.10'))
     }
 }
 
