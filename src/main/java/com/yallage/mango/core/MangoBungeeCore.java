@@ -8,9 +8,6 @@ import com.yallage.mango.core.log.MangoBungeeLogger;
 import net.md_5.bungee.api.plugin.Plugin;
 
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
 public class MangoBungeeCore extends Plugin {
     static MangoBungeeCore instance;
@@ -35,14 +32,6 @@ public class MangoBungeeCore extends Plugin {
         Config config = MangoBungeeConfiguring.getConfig();
 
         MangoBungeeLogger.info("初始化资源");
-        // 线程池
-        MongodbConnection.executors = new ThreadPoolExecutor(
-                config.getThreadCorePoolSize(),
-                config.getThreadMaxPoolSize(),
-                config.getThreadKeepAliveTime(),
-                TimeUnit.SECONDS,
-                new LinkedBlockingQueue<>()
-        );
         // Mongodb 客户端池
         MongodbConnection.connections = new ConcurrentHashMap<>();
         MangoBungeeLogger.info("初始化资源完成");
@@ -64,9 +53,5 @@ public class MangoBungeeCore extends Plugin {
         MongodbConnection.connections.forEach((key, value) -> {
             value.close();
         });
-        // 关闭线程池
-        MongodbConnection.executors.shutdown();
-        // 保存配置文件
-        MangoBungeeConfiguring.saveConfig();
     }
 }

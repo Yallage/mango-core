@@ -8,9 +8,6 @@ import com.yallage.mango.core.log.MangoBukkitLogger;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
 public class MangoBukkitCore extends JavaPlugin {
     static MangoBukkitCore instance;
@@ -36,14 +33,6 @@ public class MangoBukkitCore extends JavaPlugin {
         Config config = MangoBukkitConfiguring.getConfig();
 
         MangoBukkitLogger.info("初始化资源");
-        // 线程池
-        MongodbConnection.executors = new ThreadPoolExecutor(
-                config.getThreadCorePoolSize(),
-                config.getThreadMaxPoolSize(),
-                config.getThreadKeepAliveTime(),
-                TimeUnit.SECONDS,
-                new LinkedBlockingQueue<>()
-        );
         // Mongodb 客户端池
         MongodbConnection.connections = new ConcurrentHashMap<>();
         MangoBukkitLogger.info("初始化资源完成");
@@ -65,9 +54,5 @@ public class MangoBukkitCore extends JavaPlugin {
         MongodbConnection.connections.forEach((key, value) -> {
             value.close();
         });
-        // 关闭线程池
-        MongodbConnection.executors.shutdown();
-        // 保存配置文件
-        MangoBukkitConfiguring.saveConfig();
     }
 }
