@@ -5,7 +5,7 @@ plugins {
 }
 
 group 'com.yallage'
-version '1.0-SNAPSHOT'
+version '1.0.0-dev'
 
 sourceCompatibility = 11
 targetCompatibility = 11
@@ -74,8 +74,8 @@ shadowJar {
 publishing {
     repositories {
         maven {
-            url = uri(project.findProperty("repository_root_url") ?: System.getenv("REPOSITORY_ROOT_URL")
-                    + (project.version.toString().endsWith('SNAPSHOT') ? 'snapshots' : 'releases'))
+            url = uri((project.findProperty("repository_root_url") ?: System.getenv("REPOSITORY_ROOT_URL"))
+                    + (project.version.toString().endsWith('release') ? 'releases' : 'snapshots'))
             credentials {
                 username = project.findProperty("repository_user") ?: System.getenv("REPOSITORY_USER")
                 password = project.findProperty("repository_token") ?: System.getenv("REPOSITORY_TOKEN")
