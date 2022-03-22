@@ -2,7 +2,7 @@ package com.yallage.mango.core.config;
 
 import com.google.gson.Gson;
 import com.yallage.mango.core.MangoBungeeCore;
-import com.yallage.mango.core.data.Config;
+import com.yallage.mango.core.interfaces.Config;
 import com.yallage.mango.core.log.MangoBungeeLogger;
 import net.md_5.bungee.api.ProxyServer;
 

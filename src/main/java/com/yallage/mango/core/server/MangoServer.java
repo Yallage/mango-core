@@ -1,11 +1,12 @@
-package com.yallage.mango.core.database;
+package com.yallage.mango.core.server;
 
 import com.mongodb.MongoClient;
 import com.mongodb.MongoCredential;
-import com.yallage.mango.core.data.Config;
+import com.yallage.mango.core.client.Clients;
+import com.yallage.mango.core.interfaces.Config;
 import com.yallage.mango.core.log.MangoBukkitLogger;
 
-public class MongodbLoader {
+public class MangoServer {
     public static void load(Config config) {
         config.getDatabases().forEach(
                 (name, database) -> {
@@ -13,7 +14,7 @@ public class MongodbLoader {
                     MongoCredential.createCredential(database.getUsername(),
                             database.getDatabase(),
                             database.getPassword().toCharArray());
-                    MongodbConnection.connections.put(database, client);
+                    Clients.connections.put(database, client);
                     MangoBukkitLogger.info("链接到数据库 " + name + " 成功");
                 }
         );

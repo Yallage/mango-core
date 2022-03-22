@@ -1,9 +1,9 @@
-package com.yallage.mango.core.database;
+package com.yallage.mango.core.client;
 
 import com.google.gson.Gson;
 import com.mongodb.client.MongoCollection;
 import com.yallage.mango.core.config.MangoBukkitConfiguring;
-import com.yallage.mango.core.data.Config;
+import com.yallage.mango.core.interfaces.Config;
 import com.yallage.mango.core.interfaces.MangoClient;
 import org.bson.Document;
 
@@ -69,7 +69,7 @@ public class MangoSyncClient implements MangoClient {
     }
 
     public MongoCollection<Document> collections(String database, String collection) {
-        return MongodbConnection.connections.get(config.getDatabases().get(database))
+        return Clients.connections.get(config.getDatabases().get(database))
                 .getDatabase(database)
                 .getCollection(collection);
     }

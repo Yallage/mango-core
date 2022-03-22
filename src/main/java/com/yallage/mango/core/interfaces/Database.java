@@ -1,4 +1,4 @@
-package com.yallage.mango.core.data;
+package com.yallage.mango.core.interfaces;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

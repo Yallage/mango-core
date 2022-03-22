@@ -1,4 +1,4 @@
-package com.yallage.mango.core.database;
+package com.yallage.mango.core.client;
 
 import com.google.gson.Gson;
 import com.yallage.mango.core.MangoBungeeCore;
@@ -22,7 +22,7 @@ public class MangoBungeeAsyncClient extends MangoSyncClient {
         ProxyServer.getInstance().getScheduler().runAsync(MangoBungeeCore.getInstance(), () -> {
             List<String> list = new ArrayList<>();
             // 获取数据库连接
-            MongodbConnection.connections.get(config.getDatabases().get(database))
+            Clients.connections.get(config.getDatabases().get(database))
                     .getDatabase(database)
                     .getCollection(collection)
                     // 转换 index 为 Document

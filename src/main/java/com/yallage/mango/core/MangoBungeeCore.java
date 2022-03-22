@@ -1,9 +1,9 @@
 package com.yallage.mango.core;
 
 import com.yallage.mango.core.config.MangoBungeeConfiguring;
-import com.yallage.mango.core.data.Config;
-import com.yallage.mango.core.database.MongodbConnection;
-import com.yallage.mango.core.database.MongodbLoader;
+import com.yallage.mango.core.interfaces.Config;
+import com.yallage.mango.core.client.Clients;
+import com.yallage.mango.core.server.MangoServer;
 import com.yallage.mango.core.log.MangoBungeeLogger;
 import net.md_5.bungee.api.plugin.Plugin;
 
@@ -33,16 +33,16 @@ public class MangoBungeeCore extends Plugin {
 
         MangoBungeeLogger.info("初始化资源");
         // Mongodb 客户端池
-        MongodbConnection.connections = new ConcurrentHashMap<>();
+        Clients.connections = new ConcurrentHashMap<>();
         MangoBungeeLogger.info("初始化资源完成");
 
         // 初始化数据库
         MangoBungeeLogger.info("初始化数据库");
-        MongodbLoader.load(config);
+        MangoServer.load(config);
         MangoBungeeLogger.info("初始化数据库完成");
 
         // 报告加载结果
-        MangoBungeeLogger.info("共加载 " + MongodbConnection.connections.size() + " 个 mongodb 链接");
+        MangoBungeeLogger.info("共加载 " + Clients.connections.size() + " 个 mongodb 链接");
         MangoBungeeLogger.info("检查完成");
     }
 
@@ -50,7 +50,7 @@ public class MangoBungeeCore extends Plugin {
     public void onDisable() {
         MangoBungeeLogger.info("芒果核 YaMangoCore 关闭中...");
         // 清理 mongodb 链接
-        MongodbConnection.connections.forEach((key, value) -> {
+        Clients.connections.forEach((key, value) -> {
             value.close();
         });
     }

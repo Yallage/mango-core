@@ -2,7 +2,7 @@ package com.yallage.mango.core.config;
 
 import com.google.gson.Gson;
 import com.yallage.mango.core.MangoBukkitCore;
-import com.yallage.mango.core.data.Config;
+import com.yallage.mango.core.interfaces.Config;
 import com.yallage.mango.core.log.MangoBukkitLogger;
 import org.bukkit.Bukkit;
 
