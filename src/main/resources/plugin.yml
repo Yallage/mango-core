@@ -1,3 +1,4 @@
 main: com.yallage.mango.core.MangoBukkitCore
 version: 1.0.0
 name: YaMangoCore
+api-version: 1.13

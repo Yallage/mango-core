@@ -20,7 +20,7 @@ public class MangoBukkitConfiguring {
     static Config config = new Config();
 
     public static void loadConfig() {
-        File file = new File(MangoBukkitCore.getInstance().getDescription().getName() + "/config.json");
+        File file = new File("plugins/" + MangoBukkitCore.getInstance().getDescription().getName() + "/config.json");
 
         if (!file.exists()) {
             MangoBukkitCore.getInstance().saveResource("config.json", false);

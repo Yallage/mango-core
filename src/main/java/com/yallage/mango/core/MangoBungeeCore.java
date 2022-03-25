@@ -1,10 +1,10 @@
 package com.yallage.mango.core;
 
+import com.yallage.mango.core.client.Clients;
 import com.yallage.mango.core.config.MangoBungeeConfiguring;
 import com.yallage.mango.core.interfaces.Config;
-import com.yallage.mango.core.client.Clients;
-import com.yallage.mango.core.server.MangoServer;
 import com.yallage.mango.core.log.MangoBungeeLogger;
+import com.yallage.mango.core.server.MangoServer;
 import net.md_5.bungee.api.plugin.Plugin;
 
 import java.util.concurrent.ConcurrentHashMap;

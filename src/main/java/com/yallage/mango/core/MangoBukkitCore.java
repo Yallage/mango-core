@@ -1,10 +1,10 @@
 package com.yallage.mango.core;
 
+import com.yallage.mango.core.client.Clients;
 import com.yallage.mango.core.config.MangoBukkitConfiguring;
 import com.yallage.mango.core.interfaces.Config;
-import com.yallage.mango.core.client.Clients;
-import com.yallage.mango.core.server.MangoServer;
 import com.yallage.mango.core.log.MangoBukkitLogger;
+import com.yallage.mango.core.server.MangoServer;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.concurrent.ConcurrentHashMap;
