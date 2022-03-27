@@ -13,7 +13,6 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.lang.reflect.Field;
 import java.util.Objects;
 
 public class MangoBungeeConfiguring {
@@ -40,20 +39,9 @@ public class MangoBungeeConfiguring {
             BufferedReader reader = new BufferedReader(new FileReader(file));
             MangoBungeeLogger.info("配置文件加载中...");
             config = gson.fromJson(reader, Config.class);
-            // 反射检查服务器配置任意变量是否为空
-            Field[] fields = config.getClass().getDeclaredFields();
-            for (Field field : fields) {
-                field.setAccessible(true);
-                if (field.get(config) == null) {
-                    MangoBungeeLogger.severe("错误的配置 " + field.getName());
-                    ProxyServer.getInstance().stop();
-                }
-            }
             MangoBungeeLogger.info("配置文件加载完成");
         } catch (FileNotFoundException exception) {
             MangoBungeeLogger.severe("config.json 文件未找到.");
-        } catch (IllegalAccessException exception) {
-            MangoBungeeLogger.severe("配置文件非法参数");
         }
     }
 

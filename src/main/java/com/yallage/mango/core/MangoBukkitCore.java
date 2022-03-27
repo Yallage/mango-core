@@ -23,13 +23,13 @@ public class MangoBukkitCore extends JavaPlugin {
 
     @Override
     public void onLoad() {
-        MangoBukkitLogger.info("芒果核 YaMangoCore 加载中...");
+        MangoBukkitLogger.info("芒果核心 YaMangoCore 加载中...");
         MangoBukkitConfiguring.loadConfig();
     }
 
     @Override
     public void onEnable() {
-        MangoBukkitLogger.info("芒果核 YaMangoCore 检查中...");
+        MangoBukkitLogger.info("芒果核心 YaMangoCore 检查中...");
         Config config = MangoBukkitConfiguring.getConfig();
 
         MangoBukkitLogger.info("初始化资源");
@@ -49,7 +49,7 @@ public class MangoBukkitCore extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        MangoBukkitLogger.info("芒果核 YaMangoCore 关闭中...");
+        MangoBukkitLogger.info("芒果核心 YaMangoCore 关闭中...");
         // 清理 mongodb 链接
         Clients.connections.forEach((key, value) -> {
             value.close();

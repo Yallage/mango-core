@@ -22,13 +22,13 @@ public class MangoBungeeCore extends Plugin {
 
     @Override
     public void onLoad() {
-        MangoBungeeLogger.info("芒果核 YaMangoCore 加载中...");
+        MangoBungeeLogger.info("芒果核心 YaMangoCore 加载中...");
         MangoBungeeConfiguring.loadConfig();
     }
 
     @Override
     public void onEnable() {
-        MangoBungeeLogger.info("芒果核 YaMangoCore 检查中...");
+        MangoBungeeLogger.info("芒果核心 YaMangoCore 检查中...");
         Config config = MangoBungeeConfiguring.getConfig();
 
         MangoBungeeLogger.info("初始化资源");
@@ -48,7 +48,7 @@ public class MangoBungeeCore extends Plugin {
 
     @Override
     public void onDisable() {
-        MangoBungeeLogger.info("芒果核 YaMangoCore 关闭中...");
+        MangoBungeeLogger.info("芒果核心 YaMangoCore 关闭中...");
         // 清理 mongodb 链接
         Clients.connections.forEach((key, value) -> {
             value.close();
