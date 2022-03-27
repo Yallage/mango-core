@@ -21,7 +21,7 @@ public class MangoBungeeConfiguring {
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
     public static void loadConfig() {
-        File file = new File("plugins" + MangoBungeeCore.getInstance().getDescription().getName() + "/config.json");
+        File file = new File("plugins/" + MangoBungeeCore.getInstance().getDescription().getName() + "/config.json");
 
         if (!file.exists()) {
             try {
