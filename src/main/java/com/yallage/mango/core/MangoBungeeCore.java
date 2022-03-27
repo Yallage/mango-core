@@ -4,7 +4,7 @@ import com.yallage.mango.core.client.Clients;
 import com.yallage.mango.core.config.MangoBungeeConfiguring;
 import com.yallage.mango.core.interfaces.Config;
 import com.yallage.mango.core.log.MangoBungeeLogger;
-import com.yallage.mango.core.server.MangoServer;
+import com.yallage.mango.core.server.MangoBungeeServer;
 import net.md_5.bungee.api.plugin.Plugin;
 
 import java.util.concurrent.ConcurrentHashMap;
@@ -38,7 +38,7 @@ public class MangoBungeeCore extends Plugin {
 
         // 初始化数据库
         MangoBungeeLogger.info("初始化数据库");
-        MangoServer.load(config);
+        MangoBungeeServer.load(config);
         MangoBungeeLogger.info("初始化数据库完成");
 
         // 报告加载结果

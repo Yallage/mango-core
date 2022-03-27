@@ -4,7 +4,7 @@ import com.yallage.mango.core.client.Clients;
 import com.yallage.mango.core.config.MangoBukkitConfiguring;
 import com.yallage.mango.core.interfaces.Config;
 import com.yallage.mango.core.log.MangoBukkitLogger;
-import com.yallage.mango.core.server.MangoServer;
+import com.yallage.mango.core.server.MangoBukkitServer;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.concurrent.ConcurrentHashMap;
@@ -39,7 +39,7 @@ public class MangoBukkitCore extends JavaPlugin {
 
         // 初始化数据库
         MangoBukkitLogger.info("初始化数据库");
-        MangoServer.load(config);
+        MangoBukkitServer.load(config);
         MangoBukkitLogger.info("初始化数据库完成");
 
         // 报告加载结果

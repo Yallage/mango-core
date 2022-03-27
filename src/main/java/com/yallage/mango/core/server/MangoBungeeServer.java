@@ -4,9 +4,9 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoCredential;
 import com.yallage.mango.core.client.Clients;
 import com.yallage.mango.core.interfaces.Config;
-import com.yallage.mango.core.log.MangoBukkitLogger;
+import com.yallage.mango.core.log.MangoBungeeLogger;
 
-public class MangoServer {
+public class MangoBungeeServer {
     public static void load(Config config) {
         config.getDatabases().forEach(
                 (name, database) -> {
@@ -15,7 +15,7 @@ public class MangoServer {
                             database.getDatabase(),
                             database.getPassword().toCharArray());
                     Clients.connections.put(database, client);
-                    MangoBukkitLogger.info("链接到数据库 " + name + " 成功");
+                    MangoBungeeLogger.info("链接到数据库 " + name + " 成功");
                 }
         );
     }
