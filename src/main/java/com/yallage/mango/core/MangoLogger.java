@@ -1,12 +1,15 @@
-package com.yallage.mango.core.log;
+package com.yallage.mango.core;
 
-import org.bukkit.Bukkit;
 import org.fusesource.jansi.Ansi;
 
 import java.util.logging.Logger;
 
-public class MangoBukkitLogger {
-    static Logger logger = Bukkit.getLogger();
+public class MangoLogger {
+    static Logger logger;
+
+    public static void logger(Logger logger) {
+        MangoLogger.logger = logger;
+    }
 
     public static void info(String message) {
         logger.info(Ansi
