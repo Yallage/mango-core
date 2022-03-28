@@ -36,7 +36,7 @@ public class MangoBukkitConfiguring {
     }
 
     public static void saveConfig() {
-        File file = new File(MangoBukkitCore.getInstance().getDescription().getName() + "config.json");
+        File file = new File("plugins/" + MangoBukkitCore.getInstance().getDescription().getName() + "config.json");
         String json = gson.toJson(config);
         try {
             OutputStream outputStream = new FileOutputStream(file);

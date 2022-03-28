@@ -46,7 +46,7 @@ public class MangoBungeeConfiguring {
     }
 
     public static void saveConfig() {
-        File file = new File(MangoBungeeCore.getInstance().getDescription().getName() + "/config.json");
+        File file = new File("plugins/" + MangoBungeeCore.getInstance().getDescription().getName() + "/config.json");
         String json = gson.toJson(config);
         try {
             OutputStream outputStream = new FileOutputStream(file);
