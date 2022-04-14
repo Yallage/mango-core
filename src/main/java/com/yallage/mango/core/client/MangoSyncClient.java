@@ -28,12 +28,16 @@ public class MangoSyncClient implements MangoClient {
 
     @Override
     public void update(String database, String collection, Map<String, Object> index, Object data) {
-        this.collections(database, collection).updateMany(Document.parse(gson.toJson(index)), Document.parse(gson.toJson(data)));
+        this.collections(database, collection).updateMany(
+                Document.parse(gson.toJsonTree(index, Map.class).toString()),
+                Document.parse(gson.toJson(data))
+        );
     }
 
     @Override
     public void delete(String database, String collection, Map<String, Object> index) {
-        this.collections(database, collection).deleteMany(Document.parse(gson.toJson(index)));
+        this.collections(database, collection).deleteMany(
+                Document.parse(gson.toJsonTree(index, Map.class).toString()));
     }
 
     @Override
@@ -42,7 +46,7 @@ public class MangoSyncClient implements MangoClient {
         // 获取数据库连接
         this.collections(database, collection)
                 // 转换 index 为 Document
-                .find(Document.parse(gson.toJson(index)))
+                .find(Document.parse(gson.toJsonTree(index, Map.class).toString()))
                 .iterator()
                 .forEachRemaining(document -> {
                     // 将 document 转换回对象
@@ -60,12 +64,16 @@ public class MangoSyncClient implements MangoClient {
 
     @Override
     public void updateOne(String database, String collection, Map<String, Object> index, Object data) {
-        this.collections(database, collection).updateOne(Document.parse(gson.toJson(data)), Document.parse(gson.toJson(data)));
+        this.collections(database, collection).updateOne(
+                Document.parse(gson.toJsonTree(index, Map.class).toString()),
+                Document.parse(gson.toJson(data))
+        );
     }
 
     @Override
     public void deleteOne(String database, String collection, Map<String, Object> index) {
-        this.collections(database, collection).deleteOne(Document.parse(gson.toJson(index)));
+        this.collections(database, collection).deleteOne(
+                Document.parse(gson.toJsonTree(index, Map.class).toString()));
     }
 
     public MongoCollection<Document> collections(String database, String collection) {

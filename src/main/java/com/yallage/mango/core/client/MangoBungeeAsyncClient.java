@@ -26,7 +26,7 @@ public class MangoBungeeAsyncClient extends MangoSyncClient {
                     .getDatabase(database)
                     .getCollection(collection)
                     // 转换 index 为 Document
-                    .find(Document.parse(gson.toJson(index)))
+                    .find(Document.parse(gson.toJsonTree(index, Map.class).toString()))
                     .iterator()
                     .forEachRemaining(document -> {
                         // 将 document 转换回对象
