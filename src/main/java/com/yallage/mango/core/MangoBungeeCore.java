@@ -51,8 +51,8 @@ public class MangoBungeeCore extends Plugin {
     public void onDisable() {
         MangoLogger.info("芒果核心 YaMangoCore 关闭中...");
         // 清理 mongodb 链接
-        Clients.connections.forEach((database, mongoClient) -> {
-            mongoClient.close();
+        Clients.connections.forEach((database, client) -> {
+            client.close();
         });
     }
 }
